@@ -1,6 +1,12 @@
 FROM oarcluster/nfs-client
 MAINTAINER Salem Harrache "salem.harrache@inria.fr"
 
+
+ENV https_proxy http://proxy.luxembourg.grid5000.fr:3128
+ENV http_proxy http://proxy.luxembourg.grid5000.fr:3128
+ENV ftp_proxy http://proxy.luxembourg.grid5000.fr:3128
+
+
 ENV OAR_VERSION 2.5
 ENV HOME /root
 ENV LC_ALL C

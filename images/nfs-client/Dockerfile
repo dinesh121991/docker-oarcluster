@@ -1,6 +1,11 @@
 FROM oarcluster/base
 MAINTAINER Salem Harrache "salem.harrache@inria.fr"
 
+
+ENV https_proxy http://proxy.luxembourg.grid5000.fr:3128
+ENV http_proxy http://proxy.luxembourg.grid5000.fr:3128
+ENV ftp_proxy http://proxy.luxembourg.grid5000.fr:3128
+
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -qq && apt-get install -y nfs-common inotify-tools -qq
 

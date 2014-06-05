@@ -3,6 +3,11 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -qq && apt-get install -y nfs-kernel-server runit inotify-tools -qq
 RUN mkdir -p /data
 
+
+ENV https_proxy http://proxy.luxembourg.grid5000.fr:3128
+ENV http_proxy http://proxy.luxembourg.grid5000.fr:3128
+ENV ftp_proxy http://proxy.luxembourg.grid5000.fr:3128
+
 RUN echo "/data *(rw,all_squash,anonuid=1000,anongid=1000,async,no_subtree_check)" >> /etc/exports
 
 ADD sbin /sbin

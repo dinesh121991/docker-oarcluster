@@ -1,6 +1,11 @@
 FROM oarcluster/nfs-client
 MAINTAINER Salem Harrache "salem.harrache@inria.fr"
 
+ENV https_proxy http://proxy.luxembourg.grid5000.fr:3128
+ENV http_proxy http://proxy.luxembourg.grid5000.fr:3128
+ENV ftp_proxy http://proxy.luxembourg.grid5000.fr:3128
+
+
 # Download oar
 ADD version.txt /tmp/version.txt
 RUN wget -q https://github.com/oar-team/oar/archive/$(cat /tmp/version.txt).tar.gz -O /tmp/oar-$(cat /tmp/version.txt).tar.gz

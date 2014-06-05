@@ -1,6 +1,10 @@
 FROM oarcluster/base
 MAINTAINER Salem Harrache "salem.harrache@inria.fr"
 
+ENV https_proxy http://proxy.luxembourg.grid5000.fr:3128
+ENV http_proxy http://proxy.luxembourg.grid5000.fr:3128
+ENV ftp_proxy http://proxy.luxembourg.grid5000.fr:3128
+
 
 RUN apt-get update && apt-get install -y dnsmasq-base inotify-tools procps
 
