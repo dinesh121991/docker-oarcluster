@@ -44,22 +44,6 @@ start_dns() {
     echo "$DNS_IP dns" >> $DNSFILE
 }
 
-start_nfs_server() {
-    image=${1:-"oarcluster/nfs-server:latest"}
-    hostname="nfs-server.$DOMAIN"
-    NFS_SERVER_CID=$($DOCKER run -d -t --dns $DNS_IP --dns-search $DOMAIN \
-           -h $hostname --name oarcluster_nfs_server --privileged \
-           $VOLUME_MAP $image /sbin/my_init --enable-insecure-key)
-
-    if [ "$NFS_SERVER_CID" = "" ]; then
-        fail "error: could not start nfs-server container from image nfs-server"
-    fi
-
-    echo "Started oarcluster_nfs_server : $NFS_SERVER_CID"
-    NFS_SERVER_IP=$($DOCKER inspect --format '{{ .NetworkSettings.IPAddress }}' $NFS_SERVER_CID)
-    echo "$NFS_SERVER_IP $hostname" >> $DNSFILE
-}
-
 start_server() {
     image=${1:-"oarcluster/server-nfs:latest"}
     hostname="server.$DOMAIN"
@@ -76,10 +60,6 @@ start_server() {
     echo "Started oarcluster_server : $SERVER_CID"
     SERVER_IP=$($DOCKER inspect --format '{{ .NetworkSettings.IPAddress }}' $SERVER_CID)
     echo "$SERVER_IP $hostname" >> $DNSFILE
-}
-
-start_server_colmet() {
-    start_server "oarcluster/server-colmet:latest"
 }
 
 start_frontend() {
@@ -242,7 +222,6 @@ source $BASEDIR/clean.sh
 
 
 start_dns
-start_nfs_server
 start_server
 start_frontend
 start_nodes

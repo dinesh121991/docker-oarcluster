@@ -61,7 +61,9 @@ bootstrap:
     - image: $$docker_image
     - dns: $$docker_dns
     - hostname: kameleon-$$distrib
-
+  - break:
+    - break:
+      - breakpoint: teeest
 #== Install and configuration steps
 setup:
   # Install
